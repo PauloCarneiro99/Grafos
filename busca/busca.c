@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "busca.h"
-
+#include "lista.h"
 
 //**************BUSCA EM LARGURA**************
 
@@ -59,7 +59,7 @@ void cria_dfs(BUSCA *d, int n){
 	}
 }
 
-void dfs_visit(BUSCA d, GRAFO *g, int i, int *time){
+void dfs_visit(BUSCA d, GRAFO *g, int i, int *time, lista *topologia){
 	d.cor[i] = cinza;
 	d.t[i].inicio = (*time);
 	(*time)++;
@@ -67,22 +67,23 @@ void dfs_visit(BUSCA d, GRAFO *g, int i, int *time){
 	for(int j=1; j<v[0]; j++){ //percorrendo todos os adjacentes
 		if(d.cor[v[j]] == branco){//quando for branco, chama recurisvamente para fazer a busca em profundidade
 			d.prd[v[j]] = i;
-			dfs_visit(d, g, v[j], time);
+			dfs_visit(d, g, v[j], time, topologia);
 		}
 	}
 	d.cor[i] = preto;
 	d.t[i].conclusao = (*time);
+	insere_lista(topologia,i,0);
 	(*time)++;
 }
 
 
-BUSCA dfs(GRAFO *g, int origem){
+BUSCA dfs(GRAFO *g, int origem, lista*topologia){
 	BUSCA d;
 	int time = 1;
 	cria_dfs(&d, g->n);
 	for(int i=origem; i<g->n; i++){ //passando em todos os vertices do grafo, começando a partir da origem
 		if(d.cor[i] == branco){
-			dfs_visit(d,g, i, &time);
+			dfs_visit(d,g, i, &time, topologia);
 		}
 	}
 	return d;

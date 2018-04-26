@@ -3,6 +3,7 @@
 
 #include "fila.h"
 #include "matriz_adj.h"
+#include "lista.h"
 
 enum{branco, cinza, preto};
 
@@ -28,8 +29,8 @@ void imprime_caminho(BUSCA b, int origem, int atual);
 
 //funcoes da busca em profundidade
 void cria_dfs(BUSCA *d, int n);
-void dfs_visit(BUSCA d, GRAFO *g, int i, int *time);
-BUSCA dfs(GRAFO *g, int origem);
+void dfs_visit(BUSCA d, GRAFO *g, int i, int *time, lista *l);
+BUSCA dfs(GRAFO *g, int origem, lista *l);
 
 
 
