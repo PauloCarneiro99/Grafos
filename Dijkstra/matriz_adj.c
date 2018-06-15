@@ -41,7 +41,7 @@ int * vertices_ajd(GRAFO *g, int vertice){
 			v = realloc(v,sizeof(int)*v[0]);
 			v[v[0]-1] = i;
 		}
-		return v;
+	return v;
 }
 
 void matriz_transposta(GRAFO *g){

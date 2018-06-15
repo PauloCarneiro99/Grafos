@@ -44,7 +44,8 @@ int empty(fila *l){
 }
 
 NO* front(fila *l){
-	return l->inicio;
+	NO* temp = l->inicio;
+	return temp;
 }
 
 void pop(fila *l){
